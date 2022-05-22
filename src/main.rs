@@ -16,12 +16,11 @@ struct MyObj {
  
 #[get("/getjson")]
 async fn index() -> HttpResponse {
-    let text = Local::now().format("%Y年%m月%d日 %H時%M分%S秒").to_string();
     HttpResponse::Ok().json(MyObj {
         slug: "fetch-pr".to_string(), //dynamicrouting[slug].tsx
         title: "たいとるなでしこ".to_string(),
         body: "やんくっく".to_string(),
-        date: {text},
+        date:  Local::now().format("%Y年%m月%d日 %H時%M分%S秒").to_string(),
         // num: 100,
         // arr: vec![1, 2, 3],
     })
