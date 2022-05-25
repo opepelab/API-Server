@@ -10,6 +10,8 @@ struct MyObj {
     title: String,
     body: String,
     date: String,
+    id: isize,
+    item: Vec<String>,
     // num: isize, 整数型 usizeもある
     // arr: Vec::<isize>,　変更可能な配列型　ただの固定配列型もある？
 }
@@ -17,10 +19,23 @@ struct MyObj {
 #[get("/getjson")]
 async fn index() -> HttpResponse {
     HttpResponse::Ok().json(MyObj {
-        slug: "fetch-pr".to_string(), //dynamicrouting[slug].tsx
-        title: "たいとるなでしこ".to_string(),
-        body: "やんくっく".to_string(),
-        date:  Local::now().format("%Y年%m月%d日 %H時%M分%S秒").to_string(),
+        item: [
+            {
+                id: 1,
+                slug: "fetch-pr".to_string(), //dynamicrouting[slug].tsx
+                title: "たいとるなでしこ".to_string(),
+                body: "やんくっく".to_string(),
+                date:  Local::now().format("%Y年%m月%d日 %H時%M分%S秒").to_string(),
+            },
+            {
+                id: 2,
+                slug: "fetch-pr".to_string(), //dynamicrouting[slug].tsx
+                title: "たいとるなでしこ".to_string(),
+                body: "やんくっく".to_string(),
+                date:  Local::now().format("%Y年%m月%d日 %H時%M分%S秒").to_string(),
+            }
+        ]
+
         // num: 100,
         // arr: vec![1, 2, 3],
     })
