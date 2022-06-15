@@ -19,7 +19,7 @@ struct MyObj {
 #[get("/getjson")]
 async fn index() -> HttpResponse {
     HttpResponse::Ok().json(MyObj {
-        item: [
+        const = item [
             {
                 id: 1,
                 slug: "fetch-pr".to_string(), //dynamicrouting[slug].tsx
