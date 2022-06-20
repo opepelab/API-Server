@@ -11,15 +11,13 @@ struct MyObj {
     body: String,
     date: String,
     id: isize,
-    item: Vec<Array>,
     // num: isize, 整数型 usizeもある
     // arr: Vec::<isize>,　変更可能な配列型　ただの固定配列型もある？
 }
  
 #[get("/getjson")]
 async fn index() -> HttpResponse {
-    HttpResponse::Ok().json(MyObj {
-        const = item [
+    HttpResponse::Ok().json(MyObj [
             {
                 id: 1,
                 slug: "fetch-pr".to_string(), //dynamicrouting[slug].tsx
@@ -38,7 +36,7 @@ async fn index() -> HttpResponse {
 
         // num: 100,
         // arr: vec![1, 2, 3],
-    })
+    )
 }
  
 #[actix_web::main]
