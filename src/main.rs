@@ -1,51 +1,32 @@
-use actix_web::{get, App, HttpResponse, HttpServer};
+use actix_web::{web, App, HttpServer, Responder};
 use serde::Serialize;
 // use chrono::Local;
 
 
 
 #[derive(Serialize)]
-struct MyObj {
+struct Country {
+    id: isize,
     slug: String,
     title: String,
-    body: String,
-    date: String,
-    id: isize,
-    // num: isize, 整数型 usizeもある
-    // arr: Vec::<isize>,　変更可能な配列型　ただの固定配列型もある？
+    body: String
 }
  
-#[get("/getjson")]
-async fn index() -> HttpResponse {
-    HttpResponse::Ok().json(MyObj [
-            {
-                id: 1,
-                slug: "fetch-pr".to_string(), //dynamicrouting[slug].tsx
-                title: "たいとるなでしこ".to_string(),
-                body: "やんくっく".to_string(),
-                // date:  Local::now().format("%Y年%m月%d日 %H時%M分%S秒").to_string(),
-            },
-            {
-                id: 2,
-                slug: "fetch-pr".to_string(), //dynamicrouting[slug].tsx
-                title: "たいとるなでしこ".to_string(),
-                body: "やんくっく".to_string(),
-                // date:  Local::now().format("%Y年%m月%d日 %H時%M分%S秒").to_string(),
-            }
-        ]
-
-        // num: 100,
-        // arr: vec![1, 2, 3],
-    )
+async fn get_country_list()  -> impl Responder {
+    let mut vec:Vec<Country> = Vec::new();
+ 
+    vec.push(Country{id: 1, slug: "CTX".to_string(), title: "nekko".to_string(), body: "Philippines".to_string()});
+ 
+    return web::Json(vec);
 }
  
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    HttpServer::new(|| App::new().service(index))
-        // localhostからのみアクセスするなら127.0.0.1
-        // .bind("127.0.0.1:8080")?
-        // EC2等に配置して外部からアクセスするなら0.0.0.0
-        .bind("0.0.0.0:8080")?
+    HttpServer::new(|| {
+        App::new()
+            .route("/countries", web::get().to(get_country_list))
+    })
+        .bind(("127.0.0.1", 8080))?
         .run()
         .await
 }

@@ -14,4 +14,4 @@ RUN cargo build --release
 ENV PORT 8080
 
 # Run the web service on container startup.
-ENTRYPOINT ["target/release/API-Server"]
+CMD ["API-Server"]
