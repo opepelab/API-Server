@@ -7,7 +7,7 @@ WORKDIR /usr/src/app
 COPY . .
 
 # Install production dependencies and build a release artifact.
-RUN cargo build --release
+RUN cargo install
 
 # Service must listen to $PORT environment variable.
 # This default value facilitates local development.
