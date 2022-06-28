@@ -1,0 +1,23 @@
+steps:
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["build", "-t", "gcr.io/inductive-gift-351105/api-server", "."]
+    timeout: 1200s
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["push", "gcr.io/inductive-gift-351105/api-server"]
+    timeout: 1200s
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+    entrypoint: gcloud
+    args:
+      - "run"
+      - "deploy"
+      - "api-server"
+      - "--image"
+      - "gcr.io/inductive-gift-351105/api-server"
+      - "--region"
+      - "asia-northeast1"
+      - "--platform"
+      - "managed"
+    timeout: 1200s
+images:
+  - "gcr.io/inductive-gift-351105/api-server"
+timeout: 2400s

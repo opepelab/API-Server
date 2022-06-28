@@ -7,11 +7,11 @@ WORKDIR /usr/src/app
 COPY . .
 
 # Install production dependencies and build a release artifact.
-RUN cargo install
+RUN cargo build --release
 
 # Service must listen to $PORT environment variable.
 # This default value facilitates local development.
 ENV PORT 8080
 
 # Run the web service on container startup.
-CMD ["API-Server"]
+ENTRYPOINT ["target/release/API-Server"]
