@@ -17,7 +17,7 @@ steps:
       - "asia-northeast1"
       - "--platform"
       - "managed"
-    timeout: 1200s
+    timeout: 2000s
 images:
   - "gcr.io/inductive-gift-351105/api-server"
 timeout: 2400s
