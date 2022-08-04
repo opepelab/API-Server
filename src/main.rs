@@ -16,6 +16,7 @@ async fn get_country_list()  -> impl Responder {
     let mut vec:Vec<Country> = Vec::new();
  
     vec.push(Country{id: 1, slug: "CTX".to_string(), title: "nekko".to_string(), body: "Philippines".to_string()});
+    vec.push(Country{id: 2, slug: "CTX".to_string(), title: "nekko".to_string(), body: "Philippines".to_string()});
  
     return web::Json(vec);
 }
